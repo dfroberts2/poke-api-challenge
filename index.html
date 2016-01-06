@@ -11,6 +11,7 @@
 </head>
 <body>
   <h1>WOOOOOOOO POKEMON</h1>
+  <h2>Your Pokemon</h2>
   <div id="my-pokemon">
   </div>
 
@@ -18,8 +19,24 @@
   </div>
 
   <div id="buttons">
+    <button type="button" id='start-button'>Start</button>
+    <button type="button" id="look-in-tall-grass">Search for new Pokemon!!!</button>
   </div>
 
 
+    <script id="pokemon-template" type="text/x-handlebars-template">
+    <h3>No. {{pokemon.national_id}} : {{pokemon.name}}</h3>
+    <img src="{{pokemon.imageUrl}}">
+    <p></p>
+    {{#each pokemon.types as |type|}}
+    <span>| {{type.name}} |</span>
+    {{/each}}
+    </script>
+
+    <script id="caught-pokemon-list" type="text/x-handlebars-template">
+      {{#each pokemons as |pk|}}
+      {{> pokemon-template pokemon=pk}}
+      {{/each}}
+    </script>
 </body>
 </html>
