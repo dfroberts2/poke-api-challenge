@@ -12,18 +12,21 @@
 
 </head>
 <body>
-  <h1>WOOOOOOOO POKEMON</h1>
-  <h2>Your Pokemon</h2>
-  <div id="my-party-pokemon">
+  <h2>Your Party Pokemon</h2>
+  <div id="my-party-pokemon"></div>
+
+  <div id="pc-box">
+    <h2>Your PC Box</h2>
+    <div id="my-stored-pokemon"></div>
   </div>
-  <div id="my-stored-pokemon"></div>
-  <div id="wild-pokemon">
-  </div>
+
+  <div id="wild-pokemon"></div>
 
   <div id="buttons">
     <button type="button" id='start-button'>Start</button>
     <button type="button" id="look-in-tall-grass">Search for new Pokemon!!!</button>
     <button type="button" id="run-from-encounter">Run Away!!!</button>
+    <button type="button" id="access-pc">Access your PC</button>
   </div>
 
   <div id="pokeball">
@@ -32,11 +35,15 @@
 
 
     <script id="pokemon-template" type="text/x-handlebars-template">
+
+    {{#if pokemon.wild}}<h2>A wild {{pokemon.name}} has appeared!!!</h2>
+    {{/if}}
     <h3>No. <span class="national-id">{{pokemon.national_id}}</span> : {{pokemon.name}}</h3>
     <img src="{{pokemon.imageUrl}}">
     <p></p>
     {{#each pokemon.types as |type|}}
     <span>| {{type.name}} |</span>
+
     {{/each}}
     </script>
 

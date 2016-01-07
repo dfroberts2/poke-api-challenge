@@ -14,6 +14,8 @@ function View(){
 
   $('#run-from-encounter').on('click', this.runFromWildPokemon.bind(this));
 
+  $('#access-pc').on('click', this.accessPokemonStorageSystem.bind(this));
+
 };
 
 View.prototype.showPartyPokemon= function(myPokemon){
@@ -40,14 +42,17 @@ View.prototype.handleStart = function(event){
     this.controller.pokedex.catchPokemon(result)
     this.showPartyPokemon(this.controller.pokedex.party_list)
     $('#start-button').hide();
+    $('#access-pc').show();
     $('#look-in-tall-grass').show();
   }.bind(this))
 }
 
 View.prototype.handleWildPokemonEncounter = function(event){
   Pokemon.getSinglePokemon().done(function(result){
+    result.wild = true
     this.showWildPokemon(result)
     $('#look-in-tall-grass').hide();
+    $('#pc-box').hide();
   }.bind(this))
 }
 
@@ -60,8 +65,7 @@ View.prototype.setupPokeballThrow = function(){
     drop: function(event, ui) {
       Pokemon.getSinglePokemon($(event.target).find(".national-id").html()).then(function(result){
       view.controller.pokedex.catchPokemon(result)
-
-      $('#wild-pokemon').hide()
+      $('#wild-pokemon').hide();
       view.showPartyPokemon(view.controller.pokedex.party_list)
       $('#look-in-tall-grass').show();
       $('#run-from-encounter').hide();
@@ -74,4 +78,12 @@ View.prototype.runFromWildPokemon = function(){
   $('#run-from-encounter').hide();
   $('#wild-pokemon').html("");
   $('#look-in-tall-grass').show();
+}
+
+View.prototype.accessPokemonStorageSystem = function(){
+  $('#my-stored-pokemon').show();
+  var context = {pokemons: this.controller.pokedex.storage_box}
+  var htmlOutput = this.caughtPokemonTemplate(context);
+  $('#my-stored-pokemon').html(htmlOutput);
+  $('#pc-box').show();
 }

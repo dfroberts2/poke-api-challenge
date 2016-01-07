@@ -4,7 +4,7 @@ function Pokemon(args){
 
 function Pokedex(){
   this.party_list = []
-  this.caught_list = []
+  this.storage_box = []
 };
 
 Pokemon.getStarterPokemon = function(pokedex){
@@ -27,9 +27,9 @@ Pokemon.getSinglePokemon = function(number){
 };
 
 Pokedex.prototype.catchPokemon = function(pokemon){
-
+  pokemon.wild = false
   if (this.partySizeTooGreat()){
-    this.caught_list.push(pokemon)
+    this.storage_box.push(pokemon)
   }else{
     this.party_list.push(pokemon)
   }
