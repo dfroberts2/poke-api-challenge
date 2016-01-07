@@ -9,6 +9,11 @@ function View(){
   this.caughtPokemonTemplate = Handlebars.compile(listSource);
 
   $('#start-button').on('click', this.handleStart.bind(this));
+  $('#look-in-tall-grass').on('click', this.handleWildPokemonEncounter.bind(this));
+  this.setupPokeballThrow();
+
+  $('#run-from-encounter').on('click', this.runFromWildPokemon.bind(this));
+
 };
 
 View.prototype.showCaughtPokemon= function(myPokemon){
@@ -17,7 +22,9 @@ View.prototype.showCaughtPokemon= function(myPokemon){
   $('#my-pokemon').html(htmlOutput);
 }
 View.prototype.showWildPokemon= function(pokemon){
-  var context = {pokemon: pokemon}
+  $('#run-from-encounter').show();
+  $('#wild-pokemon').show();
+  var context = {pokemon: pokemon};
   var htmlOutput = this.singlePokemonTemplate(context);
   $('#wild-pokemon').html(htmlOutput);
 }
@@ -35,4 +42,37 @@ View.prototype.handleStart = function(event){
     $('#start-button').hide();
     $('#look-in-tall-grass').show();
   }.bind(this))
+}
+
+View.prototype.handleWildPokemonEncounter = function(event){
+  Pokemon.getSinglePokemon().done(function(result){
+    this.showWildPokemon(result)
+    $('#look-in-tall-grass').hide();
+  }.bind(this))
+}
+
+View.prototype.setupPokeballThrow = function(){
+  var view = this
+  $('#pokeball-pic').draggable({
+    revert: true
+  })
+  $('#wild-pokemon').droppable({
+    drop: function(event, ui) {
+      Pokemon.getSinglePokemon($(event.target).find(".national-id").html()).then(function(result){
+      view.controller.pokedex.catchPokemon(result)
+
+      $('#wild-pokemon').hide()
+      view.showCaughtPokemon(view.controller.pokedex.caught_list)
+      $('#look-in-tall-grass').show();
+      $('#run-from-encounter').hide();
+      })
+    }
+  });
+}
+
+View.prototype.runFromWildPokemon = function(){
+  $('#run-from-encounter').hide();
+  $('#wild-pokemon').html("");
+  $('#look-in-tall-grass').show();
+
 }
