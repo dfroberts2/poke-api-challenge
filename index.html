@@ -48,8 +48,8 @@
     </script>
 
     <script id="caught-pokemon-list" type="text/x-handlebars-template">
-      {{#each pokemons as |pk|}}
-        <div class="each-owned-pokemon">
+      {{#each pokemons as |pk index|}}
+        <div class="each-owned-pokemon"> <span class="list-index">{{index}}</span>
           {{> pokemon-template pokemon=pk}}
         </div>
       {{/each}}

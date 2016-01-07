@@ -16,13 +16,16 @@ function View(){
 
   $('#access-pc').on('click', this.accessPokemonStorageSystem.bind(this));
 
+  $('#my-party-pokemon').on('dragstart', this.swapParty.bind(this));
 };
 
 View.prototype.showPartyPokemon= function(myPokemon){
   var context = {pokemons: myPokemon}
   var htmlOutput = this.caughtPokemonTemplate(context);
   $('#my-party-pokemon').html(htmlOutput);
+  this.swapParty();
 }
+
 View.prototype.showWildPokemon= function(pokemon){
   $('#run-from-encounter').show();
   $('#wild-pokemon').show();
@@ -86,4 +89,34 @@ View.prototype.accessPokemonStorageSystem = function(){
   var htmlOutput = this.caughtPokemonTemplate(context);
   $('#my-stored-pokemon').html(htmlOutput);
   $('#pc-box').show();
+  // this.swapPartyBox();
 }
+
+
+View.prototype.swapParty = function(){
+  var view = this
+  $('#my-party-pokemon .each-owned-pokemon').draggable({
+  })
+  $('#my-party-pokemon .each-owned-pokemon').droppable({
+    drop: function(event, ui) {
+      drop = $(event.target).find(".list-index").html()
+      drag = ui.draggable.find('.list-index').html()
+      view.controller.pokedex.switchPartyPokemon(drag, drop)
+      view.showPartyPokemon(view.controller.pokedex.party_list);
+    }
+  })
+}
+
+// View.prototype.swapParty = function(){
+//   var view = this
+//   $('#my-party-pokemon .each-owned-pokemon').draggable({
+//   })
+//   $('#pc-box .each-owned-pokemon').droppable({
+//     drop: function(event, ui) {
+//       drop = $(event.target).find(".list-index").html()
+//       drag = ui.draggable.find('.list-index').html()
+//       view.controller.pokedex.switchPartyPokemon(drag, drop)
+//       view.showPartyPokemon(view.controller.pokedex.party_list);
+//     }
+//   })
+// }
