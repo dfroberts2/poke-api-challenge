@@ -1,0 +1,26 @@
+#look-in-tall-grass{
+  display: none;
+}
+
+#pokeball-pic{
+  width: 100px;
+  height: 100px;
+}
+
+.each-owned-pokemon {
+  display: inline-block;
+  margin-right: 20px ;
+}
+
+#run-from-encounter{
+  display: none;
+}
+
+#access-pc{
+  display: none;
+}
+
+#pc-box{
+  display: none;
+}
+

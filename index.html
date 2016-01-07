@@ -3,23 +3,56 @@
   <title>Pokemon Catcher!</title>
   <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js"></script>
   <script src="controller.js"></script>
   <script src="model.js"></script>
   <script src="view.js"></script>
+
   <link rel="stylesheet" type="text/css" href="main.css">
 
 </head>
 <body>
-  <h1>WOOOOOOOO POKEMON</h1>
-  <div id="my-pokemon">
+  <h2>Your Party Pokemon</h2>
+  <div id="my-party-pokemon"></div>
+
+  <div id="pc-box">
+    <h2>Your PC Box</h2>
+    <div id="my-stored-pokemon"></div>
   </div>
 
-  <div id="wild-pokemon">
-  </div>
+  <div id="wild-pokemon"></div>
 
   <div id="buttons">
+    <button type="button" id='start-button'>Start</button>
+    <button type="button" id="look-in-tall-grass">Search for new Pokemon!!!</button>
+    <button type="button" id="run-from-encounter">Run Away!!!</button>
+    <button type="button" id="access-pc">Access your PC</button>
+  </div>
+
+  <div id="pokeball">
+    <img id="pokeball-pic" src="pokeball_cutie_mark_by_cottenheart-d7ufe4x.png">
   </div>
 
 
+    <script id="pokemon-template" type="text/x-handlebars-template">
+
+    {{#if pokemon.wild}}<h2>A wild {{pokemon.name}} has appeared!!!</h2>
+    {{/if}}
+    <h3>No. <span class="national-id">{{pokemon.national_id}}</span> : {{pokemon.name}}</h3>
+    <img src="{{pokemon.imageUrl}}">
+    <p></p>
+    {{#each pokemon.types as |type|}}
+    <span>| {{type.name}} |</span>
+
+    {{/each}}
+    </script>
+
+    <script id="caught-pokemon-list" type="text/x-handlebars-template">
+      {{#each pokemons as |pk|}}
+        <div class="each-owned-pokemon">
+          {{> pokemon-template pokemon=pk}}
+        </div>
+      {{/each}}
+    </script>
 </body>
 </html>
