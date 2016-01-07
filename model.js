@@ -46,3 +46,9 @@ Pokedex.prototype.switchPartyPokemon = function(dragIndex, dropIndex){
   this.party_list[dragIndex] = drag
   this.party_list[dropIndex] = drop
 }
+
+Pokedex.prototype.switchPartyBoxPokemon = function (dragIndex, dropIndex){
+  drop = this.storage_box[dropIndex]
+  drag = this.party_list[dragIndex]
+  debugger
+}

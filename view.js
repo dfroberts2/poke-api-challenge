@@ -89,6 +89,7 @@ View.prototype.accessPokemonStorageSystem = function(){
   var htmlOutput = this.caughtPokemonTemplate(context);
   $('#my-stored-pokemon').html(htmlOutput);
   $('#pc-box').show();
+  // this.swapPartyBox();
 }
 
 
@@ -105,3 +106,17 @@ View.prototype.swapParty = function(){
     }
   })
 }
+
+// View.prototype.swapParty = function(){
+//   var view = this
+//   $('#my-party-pokemon .each-owned-pokemon').draggable({
+//   })
+//   $('#pc-box .each-owned-pokemon').droppable({
+//     drop: function(event, ui) {
+//       drop = $(event.target).find(".list-index").html()
+//       drag = ui.draggable.find('.list-index').html()
+//       view.controller.pokedex.switchPartyPokemon(drag, drop)
+//       view.showPartyPokemon(view.controller.pokedex.party_list);
+//     }
+//   })
+// }
