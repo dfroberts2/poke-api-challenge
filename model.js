@@ -3,6 +3,7 @@ function Pokemon(args){
 };
 
 function Pokedex(){
+  this.party_list = []
   this.caught_list = []
 };
 
@@ -26,5 +27,15 @@ Pokemon.getSinglePokemon = function(number){
 };
 
 Pokedex.prototype.catchPokemon = function(pokemon){
-  this.caught_list.push(pokemon)
+
+  if (this.partySizeTooGreat()){
+    this.caught_list.push(pokemon)
+  }else{
+    this.party_list.push(pokemon)
+  }
+
+}
+
+Pokedex.prototype.partySizeTooGreat = function(){
+  return this.party_list.length >= 6
 }
