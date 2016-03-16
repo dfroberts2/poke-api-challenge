@@ -5,6 +5,7 @@ Poke Api Challenge is tiny html game that was created as an exercise in JavaScri
 
 Technologies used:
 JS/JQuery/JQuery UI
+Handlebars
 Pokeapi (http://pokeapi.co/)
 HTML5
 CSS3
